@@ -12,10 +12,10 @@ public static class IsTestData
     {
         return new TheoryData<Is<bool>, bool, IMatch<bool>?>()
         {
-            { new Is<bool>(true), true, new IsMatch<bool>(true) },
+            { new Is<bool>(true), true, new OneElementMatch<bool>(true) },
             { new Is<bool>(true), false, null },
             { new Is<bool>(false), true, null },
-            { new Is<bool>(false), false, new IsMatch<bool>(false) },
+            { new Is<bool>(false), false, new OneElementMatch<bool>(false) },
         };
     }
 }

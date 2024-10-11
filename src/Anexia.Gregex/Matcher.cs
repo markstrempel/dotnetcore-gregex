@@ -26,11 +26,11 @@ public sealed class Matcher<T>
                 partialMatches = partialMatches.Add(potentialMatch);
             }
 
-            foreach (var initialMatch in partialMatches)
+            foreach (var partialMatch in partialMatches)
             {
-                if (initialMatch.IsFinishable())
+                if (partialMatch.IsFinishable())
                 {
-                    yield return initialMatch.Finish();
+                    yield return partialMatch.Finish();
                 }
             }
         }

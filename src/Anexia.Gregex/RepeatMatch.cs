@@ -8,13 +8,21 @@ using System.Collections.Immutable;
 
 namespace Anexia.Gregex;
 
-public record class RepeatMatch<T>(IGregex<T> SubExpression, IMatch<T> PartialMatch, int? Times, IImmutableList<Match<T>> PreviousMatches) : IMatch<T>
+public record class RepeatMatch<T>(
+    IGregex<T> SubExpression,
+    IMatch<T> PartialMatch,
+    int? Times,
+    IImmutableList<Match<T>> PreviousMatches) : IMatch<T>
 {
+    public RepeatMatch(IGregex<T> SubExpression, IMatch<T> PartialMatch, int? Times) : this(SubExpression, PartialMatch,
+        Times, ImmutableList<Match<T>>.Empty)
+    {
+    }
 
-    public RepeatMatch(IGregex<T> SubExpression, IMatch<T> PartialMatch, int? Times) : this(SubExpression, PartialMatch, Times, ImmutableList<Match<T>>.Empty) { }
+    private bool IsMaxCountReached() => Times != null && PreviousMatches.Count == Times - 1;
     
     public bool IsFinishable() => (Times == null && PartialMatch.IsFinishable()) 
-                                  || (PartialMatch.IsFinishable() && PreviousMatches.Count == Times - 1);
+                                  || (PartialMatch.IsFinishable() && IsMaxCountReached());
 
     public Match<T> Finish()
     {
@@ -25,7 +33,7 @@ public record class RepeatMatch<T>(IGregex<T> SubExpression, IMatch<T> PartialMa
     public bool IsExtendable(T nextElement) => PartialMatch.IsExtendable(nextElement) ||
                                                (PartialMatch.IsFinishable() &&
                                                 SubExpression.CreateMatch(nextElement) != null &&
-                                                PreviousMatches.Count < Times - 1);
+                                                !IsMaxCountReached());
 
     public IMatch<T> Extend(T nextElement)
     {

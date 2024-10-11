@@ -1,12 +1,25 @@
 ﻿using Anexia.Gregex;
 
-var testList = "FooBarFooBarFoo".ToCharArray();
+var fooBar = "FooBarFooBarFoo".ToCharArray();
 
-var gregex = Gregex.Is('o').Times(2);
+var twoOs = Gregex.Is('o').Times(2);
+
+var anyChar = Gregex.Any<char>();
 
 var matcher = new Matcher<char>();
 
-var matches = matcher.FindMatches(gregex, testList).ToArray();
+var oMatches = matcher.FindMatches(twoOs, fooBar).ToArray();
 
-Console.WriteLine($"Found: {matches.Length} matches.");
-Console.WriteLine(string.Join("\n", matches.AsEnumerable()));
+Console.WriteLine($"Found: {oMatches.Length} os.");
+Console.WriteLine(string.Join("\n", oMatches.AsEnumerable()));
+
+var anyMatches = matcher.FindMatches(anyChar, fooBar).ToArray();
+
+Console.WriteLine($"Found: {anyMatches.Length} matches for any.");
+Console.WriteLine(string.Join("\n", anyMatches.AsEnumerable()));
+
+var anyAtLeastOnce = Gregex.Is('a').AtLeastOnce();
+
+var prefixMatches = matcher.FindMatches(anyAtLeastOnce, ['a', 'a', 'a']).ToArray();
+Console.WriteLine($"Found: {prefixMatches.Length} matches for at least one any.");
+Console.WriteLine(string.Join("\n", prefixMatches.AsEnumerable()));
