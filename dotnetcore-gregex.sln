@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Anexia.Gregex", "src\Anexia.Gregex\Anexia.Gregex.csproj", "{07B62AC7-BCE4-4A20-8A0F-6EE1152F90E0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{DB20A418-DCE6-457F-BF75-CC36CE1E8D25}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{471DF611-07A8-4581-9297-110580DBCC4F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Anexia.Gregex.Test", "test\Anexia.Gregex.Test\Anexia.Gregex.Test.csproj", "{905349B3-4F44-4EE9-AEFB-7E24967AF0B5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "examples", "examples", "{9799FB17-155A-4CCC-A6A3-5FC365CEED3F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Anexia.Gregex.Examples", "examples\Anexia.Gregex.Examples\Anexia.Gregex.Examples.csproj", "{166B6342-8E5E-4C5F-90DF-F6DB456BA573}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{07B62AC7-BCE4-4A20-8A0F-6EE1152F90E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07B62AC7-BCE4-4A20-8A0F-6EE1152F90E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07B62AC7-BCE4-4A20-8A0F-6EE1152F90E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07B62AC7-BCE4-4A20-8A0F-6EE1152F90E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{905349B3-4F44-4EE9-AEFB-7E24967AF0B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{905349B3-4F44-4EE9-AEFB-7E24967AF0B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{905349B3-4F44-4EE9-AEFB-7E24967AF0B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{905349B3-4F44-4EE9-AEFB-7E24967AF0B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{166B6342-8E5E-4C5F-90DF-F6DB456BA573}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{166B6342-8E5E-4C5F-90DF-F6DB456BA573}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{166B6342-8E5E-4C5F-90DF-F6DB456BA573}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{166B6342-8E5E-4C5F-90DF-F6DB456BA573}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{07B62AC7-BCE4-4A20-8A0F-6EE1152F90E0} = {DB20A418-DCE6-457F-BF75-CC36CE1E8D25}
+		{905349B3-4F44-4EE9-AEFB-7E24967AF0B5} = {471DF611-07A8-4581-9297-110580DBCC4F}
+		{166B6342-8E5E-4C5F-90DF-F6DB456BA573} = {9799FB17-155A-4CCC-A6A3-5FC365CEED3F}
+	EndGlobalSection
+EndGlobal
