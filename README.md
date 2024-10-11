@@ -1,33 +1,33 @@
-## PROJECT NAME
+## Anexia.Gregex
 
-A short description of what this project does.
+Generalized regular expressions for sequences (IEnumerables, Lists, Arrays).
 
 ## Goals
 
-It is a good idea to provide a mission statement for your project, enshrining
-what the project wants to accomplish so that as more people join your project
-everyone can work in alignment.
-
-### Installation
-
-Instructions for how to download/install the code onto your machine.
-
-Example:
-```
-./install myProject --save
-```
+Provide an API to match lists similar to how you can match regexes against strings.
 
 ### Usage
 
-Usage instructions for your code.
+The main entry point is the ```Gregex``` class it allows you to construct expressions. You can use the
+Matcher class to match these expressions against IEnumerables.
 
 Example:
-
 ```
-var myMod = require('mymodule');
+using Anexia.Gregex;
 
-myMod.foo('hi');
+var testList = "FooBarFooBarFoo".ToCharArray();
+
+var gregex = Gregex.Is('o').Times(2);
+
+var matcher = new Matcher<char>();
+
+var matches = matcher.FindMatches(gregex, testList).ToArray();
+
+Console.WriteLine($"Found: {matches.Length} matches.");
+Console.WriteLine(string.Join("\n", matches.AsEnumerable()));
 ```
+
+You can find more detailed examples in the [Examples Folder](examples).
 
 ### Contributing
 
