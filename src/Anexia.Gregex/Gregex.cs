@@ -17,4 +17,6 @@ public static class Gregex
         new Repeat<T>(gregexToRepeat, null);
     
     public static IGregex<T> Any<T>() => new Any<T>();
+    
+    public static IGregex<T> FollowedBy<T>(this IGregex<T> first, IGregex<T> second) => new Pair<T>(first, second);
 }

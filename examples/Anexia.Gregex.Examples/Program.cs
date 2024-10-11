@@ -20,6 +20,18 @@ Console.WriteLine(string.Join("\n", anyMatches.AsEnumerable()));
 
 var anyAtLeastOnce = Gregex.Is('a').AtLeastOnce();
 
-var prefixMatches = matcher.FindMatches(anyAtLeastOnce, ['a', 'a', 'a']).ToArray();
-Console.WriteLine($"Found: {prefixMatches.Length} matches for at least one any.");
-Console.WriteLine(string.Join("\n", prefixMatches.AsEnumerable()));
+var anyAtLeastOnceMatches = matcher.FindMatches(anyAtLeastOnce, ['a', 'a', 'a']).ToArray();
+Console.WriteLine($"Found: {anyAtLeastOnceMatches.Length} matches for at least one any.");
+Console.WriteLine(string.Join("\n", anyAtLeastOnceMatches.AsEnumerable()));
+
+var oFollowedByB = Gregex.Is('o').FollowedBy(Gregex.Is('B'));
+
+var oFollowedByBMatches = matcher.FindMatches(oFollowedByB, fooBar).ToArray();
+Console.WriteLine($"Found: {oFollowedByBMatches.Length} matches for oB.");
+Console.WriteLine(string.Join("\n", oFollowedByBMatches.AsEnumerable()));
+
+var anyThinkBeforeF = Gregex.Any<char>().FollowedBy(Gregex.Is('F'));
+
+var anyThinkBeforeFMatches = matcher.FindMatches(anyThinkBeforeF, fooBar).ToArray();
+Console.WriteLine($"Found: {anyThinkBeforeFMatches.Length} matches for *F.");
+Console.WriteLine(string.Join("\n", anyThinkBeforeFMatches.AsEnumerable()));
