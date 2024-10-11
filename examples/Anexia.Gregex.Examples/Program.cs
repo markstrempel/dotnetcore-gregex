@@ -30,7 +30,7 @@ var oFollowedByBMatches = matcher.FindMatches(oFollowedByB, fooBar).ToArray();
 Console.WriteLine($"Found: {oFollowedByBMatches.Length} matches for oB.");
 Console.WriteLine(string.Join("\n", oFollowedByBMatches.AsEnumerable()));
 
-var anyThinkBeforeF = Gregex.Any<char>().FollowedBy(Gregex.Is('F'));
+var anyThinkBeforeF = Gregex.Pattern(Gregex.Any<char>(), Gregex.Is('F'));
 
 var anyThinkBeforeFMatches = matcher.FindMatches(anyThinkBeforeF, fooBar).ToArray();
 Console.WriteLine($"Found: {anyThinkBeforeFMatches.Length} matches for *F.");

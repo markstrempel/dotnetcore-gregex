@@ -19,4 +19,7 @@ public static class Gregex
     public static IGregex<T> Any<T>() => new Any<T>();
     
     public static IGregex<T> FollowedBy<T>(this IGregex<T> first, IGregex<T> second) => new Pair<T>(first, second);
+
+    public static IGregex<T> Pattern<T>(IGregex<T> first, params IGregex<T>[] exps)
+        => exps.Aggregate(first, (lastExpression, nextExpression) => lastExpression.FollowedBy(nextExpression));
 }
