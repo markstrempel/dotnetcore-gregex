@@ -5,5 +5,14 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
     </PropertyGroup>
+    
+    <PropertyGroup>
+        <Company>Anexia</Company>
+        <Authors>Mark Strempel</Authors>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+    </PropertyGroup>
 
+    <ItemGroup>
+        <None Include="$(MSBuildProjectDirectory)/../../README.md" Pack="true" PackagePath="" />
+    </ItemGroup>
 </Project>
