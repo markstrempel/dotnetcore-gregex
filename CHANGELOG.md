@@ -6,17 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [x.y.z] - YYYY-MM-DD
+## [0.0.1] - 2024-10-25
 
 ### Added
-- Lorem ipsum dolor sit amet
-
-### Deprecated
-- Nothing.
-
-### Removed
-- Nothing.
-
-### Fixed
-- Nothing.
+- Initial release with basic matchers.
 
