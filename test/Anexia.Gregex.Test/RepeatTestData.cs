@@ -1,5 +1,5 @@
 ﻿// ------------------------------------------------------------------------------------------
-//  <copyright file = "IsTestData.cs" company = "ANEXIA® Internetdienstleistungs GmbH">
+//  <copyright file = "TestTestData.cs" company = "ANEXIA® Internetdienstleistungs GmbH">
 //  Copyright (c) ANEXIA® Internetdienstleistungs GmbH. All rights reserved.
 //  </copyright>
 // ------------------------------------------------------------------------------------------

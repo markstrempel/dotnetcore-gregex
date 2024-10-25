@@ -1,5 +1,5 @@
 ﻿// ------------------------------------------------------------------------------------------
-//  <copyright file = "IsTest.cs" company = "ANEXIA® Internetdienstleistungs GmbH">
+//  <copyright file = "TestTest.cs" company = "ANEXIA® Internetdienstleistungs GmbH">
 //  Copyright (c) ANEXIA® Internetdienstleistungs GmbH. All rights reserved.
 //  </copyright>
 // ------------------------------------------------------------------------------------------
@@ -7,13 +7,13 @@
 
 namespace Anexia.Gregex.Test;
 
-public sealed class IsTest
+public sealed class TestTest
 {
     [Theory]
-    [MemberData(nameof(IsTestData.CreateMatchTestData), MemberType = typeof(IsTestData))]
-    public void CreateMatch<T>(Is<T> isGregex, T value, IMatch<T>? expectedValue)
+    [MemberData(nameof(TestTestData.CreateMatchTestData), MemberType = typeof(TestTestData))]
+    public void CreateMatch<T>(Test<T> testGregex, T value, IMatch<T>? expectedValue)
     {
-        var actualMatch = isGregex.CreateMatch(value);
+        var actualMatch = testGregex.CreateMatch(value);
         
         Assert.Equal(expectedValue, actualMatch);
     }
