@@ -4,6 +4,8 @@
 //  </copyright>
 // ------------------------------------------------------------------------------------------
 
+using CsCheck;
+
 namespace Anexia.Gregex.Test;
 
 public static class MatcherTestData
@@ -12,7 +14,7 @@ public static class MatcherTestData
     {
         var matcher = new Matcher<int>();
 
-        var elementValue = 2;
+        var elementValue = 5;
         var expression = Gregex.Is(elementValue);
 
         return new TheoryData<Matcher<int>, IGregex<int>, IEnumerable<int>, IEnumerable<Match<int>>>()
@@ -25,6 +27,37 @@ public static class MatcherTestData
             { matcher, expression, [1, elementValue, 1], [new Match<int>([elementValue])] },
             { matcher, expression, [elementValue, elementValue], [new Match<int>([elementValue]), 
                 new Match<int>([elementValue])] },
+        };
+    }
+
+    public static TheoryData<Matcher<string>, Gen<(IGregex<string>, IEnumerable<string>)>> MatcherExecutesExpressionWithoutErrorsExamples()
+    {
+        var maxDepth = 5;
+        var simpleExpressions = Gen.OneOf(
+            Gen.String.Select(Gregex.Is),
+            Gen.Const(Gregex.Any<string>()));
+
+        var higherOrderExpressions = Gen.Recursive<IGregex<string>>((depth, genGregex) =>
+        {
+            if (depth == maxDepth)
+            {
+                return simpleExpressions;
+            }
+            var followedBy = genGregex.SelectMany(firstExpression => genGregex.Select(firstExpression.FollowedBy));
+            var atLeastOnce = genGregex.Select(gregex => gregex.AtLeastOnce());
+            var times = genGregex.SelectMany(exp => Gen.UInt.Select(numberOfTimes => exp.Times((int)numberOfTimes)));
+
+            return Gen.OneOf(followedBy, atLeastOnce, times);
+        });
+        
+        var stringLists = Gen.String.Array;
+
+        var expressionsAndLists =
+            higherOrderExpressions.SelectMany(exp => stringLists.Select(strings => (exp, strings.AsEnumerable())));
+
+        return new TheoryData<Matcher<string>, Gen<(IGregex<string>, IEnumerable<string>)>>()
+        {
+            { new Matcher<string>(), expressionsAndLists }
         };
     }
 }
