@@ -4,18 +4,9 @@
 //  </copyright>
 // ------------------------------------------------------------------------------------------
 
-
 namespace Anexia.Gregex;
 
-public record Test<T>(Func<T, bool> Predicate) : IGregex<T>
+internal record Test<T>(Func<T, bool> Predicate) : IGregex<T>
 {
-    public IMatch<T>? CreateMatch(T element)
-    {
-        if (Predicate(element))
-        {
-            return new OneElementMatch<T>(element);
-        }
-
-        return null;
-    }
+    public IMatch<T>? CreateMatch(T element) => Predicate(element) ? new OneElementMatch<T>(element) : null;
 }

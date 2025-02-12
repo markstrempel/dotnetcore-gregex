@@ -8,7 +8,7 @@ using System.Collections.Immutable;
 
 namespace Anexia.Gregex;
 
-public record class RepeatMatch<T>(
+internal record RepeatMatch<T>(
     IGregex<T> SubExpression,
     IMatch<T> PartialMatch,
     int? Times,
@@ -21,8 +21,8 @@ public record class RepeatMatch<T>(
 
     private bool IsMaxCountReached() => Times != null && PreviousMatches.Count == Times - 1;
     
-    public bool IsFinishable() => (Times == null && PartialMatch.IsFinishable()) 
-                                  || (PartialMatch.IsFinishable() && IsMaxCountReached());
+    public bool IsCompletable() => (Times == null && PartialMatch.IsCompletable()) 
+                                  || (PartialMatch.IsCompletable() && IsMaxCountReached());
 
     public Match<T> Finish()
     {
@@ -31,7 +31,7 @@ public record class RepeatMatch<T>(
     }
 
     public bool IsExtendable(T nextElement) => PartialMatch.IsExtendable(nextElement) ||
-                                               (PartialMatch.IsFinishable() &&
+                                               (PartialMatch.IsCompletable() &&
                                                 SubExpression.CreateMatch(nextElement) != null &&
                                                 !IsMaxCountReached());
 

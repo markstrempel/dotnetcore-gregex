@@ -10,17 +10,17 @@ namespace Anexia.Gregex.Test;
 public sealed class RepeatMatchTest
 {
     [Theory]
-    [MemberData(nameof(RepeatMatchTestData.IsFinishableExamples), MemberType = typeof(RepeatMatchTestData))]
-    public void IsFinishable<T>(RepeatMatch<T> match, bool isFinishable)
+    [MemberData(nameof(RepeatMatchTestData.IsCompletableExamples), MemberType = typeof(RepeatMatchTestData))]
+    public void IsCompletable<T>(IMatch<T> match, bool isCompletable)
     {
-        var actualIsFinishable = match.IsFinishable();
+        var actualIsCompletable = match.IsCompletable();
         
-        Assert.Equal(isFinishable, actualIsFinishable);
+        Assert.Equal(isCompletable, actualIsCompletable);
     }
 
     [Theory]
     [MemberData(nameof(RepeatMatchTestData.FinishExamples), MemberType = typeof(RepeatMatchTestData))]
-    public void Finish<T>(RepeatMatch<T> match, Match<T> expectedMatch)
+    public void Finish<T>(IMatch<T> match, Match<T> expectedMatch)
     {
         var actualMatch = match.Finish();
         
@@ -29,7 +29,7 @@ public sealed class RepeatMatchTest
 
     [Theory]
     [MemberData(nameof(RepeatMatchTestData.IsExtendableExamples), MemberType = typeof(RepeatMatchTestData))]
-    public void IsExtendable<T>(RepeatMatch<T> match, T element, bool expectedIsExtendable)
+    public void IsExtendable<T>(IMatch<T> match, T element, bool expectedIsExtendable)
     {
         var actualIsExtendable = match.IsExtendable(element);
         
@@ -38,7 +38,7 @@ public sealed class RepeatMatchTest
 
     [Theory]
     [MemberData(nameof(RepeatMatchTestData.ExtendExamples), MemberType = typeof(RepeatMatchTestData))]
-    public void Extend<T>(RepeatMatch<T> match, T element, IMatch<T> expectedMatch)
+    public void Extend<T>(IMatch<T> match, T element, IMatch<T> expectedMatch)
     {
         var actualMatch = match.Extend(element);
         

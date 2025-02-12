@@ -6,7 +6,11 @@
 
 namespace Anexia.Gregex;
 
+/// <summary>
+/// Base interface for expressions.
+/// </summary>
+/// <typeparam name="T">Type of elements that can be matched.</typeparam>
 public interface IGregex<T>
 {
-    public IMatch<T>? CreateMatch(T element);
+    IMatch<T>? CreateMatch(T element);
 }

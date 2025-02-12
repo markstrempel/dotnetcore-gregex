@@ -9,7 +9,7 @@ Provide an API to match lists similar to how you can match regexes against strin
 ### Usage
 
 The main entry point is the ```Gregex``` class it allows you to construct expressions. You can use the
-Matcher class to match these expressions against IEnumerables.
+Matcher class to match these expressions against instances of IEnumerable.
 
 Example:
 ```

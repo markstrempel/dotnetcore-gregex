@@ -8,9 +8,9 @@ namespace Anexia.Gregex.Test;
 
 public static class TestTestData
 {
-    public static TheoryData<Test<bool>, bool, IMatch<bool>?> CreateMatchTestData()
+    public static TheoryData<IGregex<bool>, bool, IMatch<bool>?> CreateMatchTestData()
     {
-        return new TheoryData<Test<bool>, bool, IMatch<bool>?>()
+        return new TheoryData<IGregex<bool>, bool, IMatch<bool>?>()
         {
             { new Test<bool>(value => value), true, new OneElementMatch<bool>(true) },
             { new Test<bool>(value => value), false, null },

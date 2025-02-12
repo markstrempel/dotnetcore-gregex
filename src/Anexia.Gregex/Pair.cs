@@ -6,13 +6,13 @@
 
 namespace Anexia.Gregex;
 
-public record Pair<T>(IGregex<T> firstExpression, IGregex<T> secondExpression) : IGregex<T>
+internal record Pair<T>(IGregex<T> FirstExpression, IGregex<T> SecondExpression) : IGregex<T>
 {
     public IMatch<T>? CreateMatch(T element)
     {
-        if (firstExpression.CreateMatch(element) is { } initialMatch)
+        if (FirstExpression.CreateMatch(element) is { } initialMatch)
         {
-            return new RepeatMatch<T>(secondExpression, initialMatch, 2);
+            return new RepeatMatch<T>(SecondExpression, initialMatch, 2);
         }
 
         return null;

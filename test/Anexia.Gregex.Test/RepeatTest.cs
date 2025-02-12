@@ -11,7 +11,7 @@ public sealed class RepeatTest
 {
     [Theory]
     [MemberData(nameof(RepeatTestData.CreateMatchTestData), MemberType = typeof(RepeatTestData))]
-    public void CreateMatch<T>(Repeat<T> repeat, T value, IMatch<T>? expectedValue)
+    internal void CreateMatch<T>(IGregex<T> repeat, T value, IMatch<T>? expectedValue)
     {
         var actualMatch = repeat.CreateMatch(value);
         

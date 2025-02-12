@@ -10,9 +10,17 @@
         <Company>Anexia</Company>
         <Authors>Mark Strempel</Authors>
         <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageProjectUrl>https://github.com/anexia/dotnetcore-gregex</PackageProjectUrl>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
     </PropertyGroup>
 
     <ItemGroup>
-        <None Include="$(MSBuildProjectDirectory)/../../README.md" Pack="true" PackagePath="" />
+        <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+            <_Parameter1>$(MSBuildProjectName).Test</_Parameter1>
+        </AssemblyAttribute>
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Include="$(MSBuildProjectDirectory)/../../README.md" Pack="true" PackagePath="/" />
     </ItemGroup>
 </Project>

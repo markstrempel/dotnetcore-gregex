@@ -9,8 +9,21 @@ using System.Collections.Immutable;
 
 namespace Anexia.Gregex;
 
+/// <summary>
+/// Class that matches sequences and expressions.
+///
+/// <seealso cref="IGregex{T}"/> <seealso cref="Match{T}"/>
+/// </summary>
+/// <typeparam name="T">The type of the elements that can be matched.</typeparam>
 public sealed class Matcher<T>
 {
+    /// <summary>
+    /// Executes the given <paramref name="gregex"/> against the sequence <paramref name="elements"/>. 
+    /// </summary>
+    /// <param name="gregex">The expression to execute.</param>
+    /// <param name="elements">The elements to process.</param>
+    /// <typeparam name="TInput">The type of the elements in <paramref name="elements"/>.</typeparam>
+    /// <returns>A sequence of all matches.</returns>
     public IEnumerable<Match<T>> FindMatches<TInput>(IGregex<T> gregex, IEnumerable<TInput> elements) where TInput : T
     {
         IImmutableList<IMatch<T>> partialMatches = ImmutableList<IMatch<T>>.Empty;
@@ -28,7 +41,7 @@ public sealed class Matcher<T>
 
             foreach (var partialMatch in partialMatches)
             {
-                if (partialMatch.IsFinishable())
+                if (partialMatch.IsCompletable())
                 {
                     yield return partialMatch.Finish();
                 }
@@ -36,9 +49,7 @@ public sealed class Matcher<T>
         }
     }
 
-    private IEnumerable<IMatch<T>> ProcessPartialMatches<TInput>(IReadOnlyCollection<IMatch<T>> partialMatches,
-        TInput element) where TInput : T
-    {
-        return partialMatches.Where(match => match.IsExtendable(element)).Select(match => match.Extend(element));
-    }
+    private static IEnumerable<IMatch<T>> ProcessPartialMatches<TInput>(IReadOnlyCollection<IMatch<T>> partialMatches,
+        TInput element) where TInput : T =>
+        partialMatches.Where(match => match.IsExtendable(element)).Select(match => match.Extend(element));
 }

@@ -6,7 +6,7 @@
 
 namespace Anexia.Gregex;
 
-public record Any<T>() : IGregex<T>
+internal record Any<T> : IGregex<T>
 {
     public IMatch<T> CreateMatch(T element) => new OneElementMatch<T>(element);
 }

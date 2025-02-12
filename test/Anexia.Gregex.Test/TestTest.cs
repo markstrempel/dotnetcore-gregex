@@ -11,7 +11,7 @@ public sealed class TestTest
 {
     [Theory]
     [MemberData(nameof(TestTestData.CreateMatchTestData), MemberType = typeof(TestTestData))]
-    public void CreateMatch<T>(Test<T> testGregex, T value, IMatch<T>? expectedValue)
+    public void CreateMatch<T>(IGregex<T> testGregex, T value, IMatch<T>? expectedValue)
     {
         var actualMatch = testGregex.CreateMatch(value);
         

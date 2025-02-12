@@ -10,7 +10,7 @@ namespace Anexia.Gregex.Test;
 
 public static class RepeatTestData
 {
-    public static TheoryData<Repeat<bool>, bool, IMatch<bool>?> CreateMatchTestData()
+    public static TheoryData<IGregex<bool>, bool, IMatch<bool>?> CreateMatchTestData()
     {
         var mockSubExpression = new Mock<IGregex<bool>>();
         var mockMatch = new Mock<IMatch<bool>>();
@@ -21,7 +21,7 @@ public static class RepeatTestData
 
         var subExpression = mockSubExpression.Object;
         
-        return new TheoryData<Repeat<bool>, bool, IMatch<bool>?>()
+        return new TheoryData<IGregex<bool>, bool, IMatch<bool>?>()
         {
             { new Repeat<bool>(subExpression, 2), true, new RepeatMatch<bool>(subExpression, initialMatch, 2) },
             { new Repeat<bool>(subExpression, 2), false, null },

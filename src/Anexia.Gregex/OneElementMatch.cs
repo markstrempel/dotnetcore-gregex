@@ -6,13 +6,14 @@
 
 namespace Anexia.Gregex;
 
-public record OneElementMatch<T>(T Element) : IMatch<T>
+internal record OneElementMatch<T>(T Element) : IMatch<T>
 {
-    public bool IsFinishable() => true;
+    public bool IsCompletable() => true;
 
     public Match<T> Finish() => new([Element]);
 
     public bool IsExtendable(T nextElement) => false;
+    
     public IMatch<T> Extend(T nextElement)
     {
         throw new InvalidOperationException();

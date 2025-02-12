@@ -6,7 +6,7 @@
 
 namespace Anexia.Gregex;
 
-public record Repeat<T>(IGregex<T> Gregex, int? Times): IGregex<T>
+internal record Repeat<T>(IGregex<T> Gregex, int? Times): IGregex<T>
 {
     public IMatch<T>? CreateMatch(T element)
     {
