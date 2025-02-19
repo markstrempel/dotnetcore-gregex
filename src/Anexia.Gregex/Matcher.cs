@@ -51,5 +51,5 @@ public sealed class Matcher<T>
 
     private static IEnumerable<IMatch<T>> ProcessPartialMatches<TInput>(IReadOnlyCollection<IMatch<T>> partialMatches,
         TInput element) where TInput : T =>
-        partialMatches.Where(match => match.IsExtendable(element)).Select(match => match.Extend(element));
+        partialMatches.Where(match => match.IsExtendable(element)).SelectMany(match => match.Extend(element));
 }

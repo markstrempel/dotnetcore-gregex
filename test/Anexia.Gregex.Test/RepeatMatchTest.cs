@@ -38,7 +38,7 @@ public sealed class RepeatMatchTest
 
     [Theory]
     [MemberData(nameof(RepeatMatchTestData.ExtendExamples), MemberType = typeof(RepeatMatchTestData))]
-    public void Extend<T>(IMatch<T> match, T element, IMatch<T> expectedMatch)
+    public void Extend<T>(IMatch<T> match, T element, IEnumerable<IMatch<T>> expectedMatch)
     {
         var actualMatch = match.Extend(element);
         

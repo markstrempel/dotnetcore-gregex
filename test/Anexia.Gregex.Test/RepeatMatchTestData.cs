@@ -106,32 +106,39 @@ public static class RepeatMatchTestData
         };
     }
 
-    public static TheoryData<IMatch<bool>, bool, IMatch<bool>> ExtendExamples()
+    public static TheoryData<IMatch<bool>, bool, IEnumerable<IMatch<bool>>> ExtendExamples()
     {
-        var onTrueMatch = new Mock<IMatch<bool>>().Object;
+        var onTrueMatch = new Mock<IMatch<bool>>(MockBehavior.Strict).Object;
         
-        var matchingTrueExpressionMock = new Mock<IGregex<bool>>();
+        var matchingTrueExpressionMock = new Mock<IGregex<bool>>(MockBehavior.Strict);
         matchingTrueExpressionMock.Setup(gregex => gregex.CreateMatch(true)).Returns(onTrueMatch);
         
-        var onTrueExtendablePartialMatchMock = new Mock<IMatch<bool>>();
+        var onTrueExtendablePartialMatchMock = new Mock<IMatch<bool>>(MockBehavior.Strict);
+        onTrueExtendablePartialMatchMock.Setup(match => match.IsCompletable()).Returns(true);
+        onTrueExtendablePartialMatchMock.Setup(match => match.Finish()).Returns(new Match<bool>([true]));
         onTrueExtendablePartialMatchMock.Setup(match => match.IsExtendable(true)).Returns(true);
-        onTrueExtendablePartialMatchMock.Setup(match => match.Extend(true)).Returns(onTrueMatch);
+        onTrueExtendablePartialMatchMock.Setup(match => match.Extend(true)).Returns([onTrueMatch]);
         
         var notExtendableButFinishableMatchMock = new Mock<IMatch<bool>>();
+        notExtendableButFinishableMatchMock.Setup(match => match.IsCompletable()).Returns(true);
         notExtendableButFinishableMatchMock.Setup(match => match.Finish()).Returns(new Match<bool>([true]));
         
-        return new TheoryData<IMatch<bool>, bool, IMatch<bool>>()
+        return new TheoryData<IMatch<bool>, bool, IEnumerable<IMatch<bool>>>()
         {
             {
                 new RepeatMatch<bool>(matchingTrueExpressionMock.Object, onTrueExtendablePartialMatchMock.Object, 2),
                 true,
-                new RepeatMatch<bool>(matchingTrueExpressionMock.Object, onTrueMatch, 2)
+                [
+                    new RepeatMatch<bool>(matchingTrueExpressionMock.Object, onTrueMatch, 2),
+                    new RepeatMatch<bool>(matchingTrueExpressionMock.Object, onTrueMatch, 2,
+                        ImmutableList.Create(new Match<bool>([true])))
+                ]
             },
             {
                 new RepeatMatch<bool>(matchingTrueExpressionMock.Object, notExtendableButFinishableMatchMock.Object, 2),
                 true,
-                new RepeatMatch<bool>(matchingTrueExpressionMock.Object, onTrueMatch, 2,
-                    ImmutableList.Create(new Match<bool>([true])))
+                [new RepeatMatch<bool>(matchingTrueExpressionMock.Object, onTrueMatch, 2,
+                    ImmutableList.Create(new Match<bool>([true])))]
             }
         };
     }

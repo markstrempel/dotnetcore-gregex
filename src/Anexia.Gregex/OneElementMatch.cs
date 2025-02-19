@@ -14,7 +14,7 @@ internal record OneElementMatch<T>(T Element) : IMatch<T>
 
     public bool IsExtendable(T nextElement) => false;
     
-    public IMatch<T> Extend(T nextElement)
+    public IEnumerable<IMatch<T>> Extend(T nextElement)
     {
         throw new InvalidOperationException();
     }

@@ -35,18 +35,29 @@ internal record RepeatMatch<T>(
                                                 SubExpression.CreateMatch(nextElement) != null &&
                                                 !IsMaxCountReached());
 
-    public IMatch<T> Extend(T nextElement)
+    public IEnumerable<IMatch<T>> Extend(T nextElement)
     {
         if (PartialMatch.IsExtendable(nextElement))
         {
-            return new RepeatMatch<T>(SubExpression, PartialMatch.Extend(nextElement), Times);
+            foreach (var match in PartialMatch.Extend(nextElement))
+            {
+                yield return this with { PartialMatch = match };
+            }
         }
 
-        return this with
+        if (PartialMatch.IsCompletable())
         {
-            PartialMatch = SubExpression.CreateMatch(nextElement)!,
-            PreviousMatches = PreviousMatches.Add(PartialMatch.Finish())
-        };
+            var subExpressionMatch = SubExpression.CreateMatch(nextElement);
+
+            if (subExpressionMatch is not null)
+            {
+                yield return this with
+                {
+                    PartialMatch = subExpressionMatch,
+                    PreviousMatches = PreviousMatches.Add(PartialMatch.Finish())
+                };
+            }   
+        }
     }
 
     public virtual bool Equals(RepeatMatch<T>? other)

@@ -36,5 +36,5 @@ public interface IMatch<T>
     /// </summary>
     /// <param name="nextElement">The next element of the sequence.</param>
     /// <returns>The new partial match.</returns>
-    IMatch<T> Extend(T nextElement);
+    IEnumerable<IMatch<T>> Extend(T nextElement);
 }
